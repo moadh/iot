@@ -8,15 +8,6 @@ using System.Text;
 namespace DeviceOne
 {
 
-    public class DeviceSpec
-    {
-        public string _deviceKey { get; set; }
-        public string _deviceName { get; set; }
-        public int _messageId { get; set; }
-        public DateTime _dateTime { get; set; }
-        public DeviceSpec() { }
-    }
-
     public class MetricsPayload
     {
         public int counter { get; set; }
@@ -37,26 +28,11 @@ namespace DeviceOne
 
         static void Main(string[] args)
         {
-            DeviceSpec device = new DeviceSpec()
-            {
-                _deviceKey = deviceKey,
-                _deviceName = deviceName,
-                _messageId = 0
-            };
-
             Console.WriteLine("Device Two reporting for duty.\n");
             deviceClient = DeviceClient.Create(iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey(deviceName, deviceKey), TransportType.Mqtt);
             deviceClient.SetMethodHandlerAsync("calculate", Calculate, null).Wait();
             Console.WriteLine("Waiting for direct method call\n Press enter to exit.");
             Console.ReadLine();
-
-            deviceClient.ProductInfo = "HappyPath_Simulated-CSharp";
-            //ReceiveC2dAsync(device);
-            while (true)
-            {
-                Console.ReadLine();
-                SendDeviceToCloudMessagesAsync(device);
-            }
 
         }
 
@@ -71,43 +47,6 @@ namespace DeviceOne
             string result = JsonConvert.SerializeObject(payload);
             return Task.FromResult(new MethodResponse(Encoding.UTF8.GetBytes(result), 200));
         }
-
-        private static async void SendDeviceToCloudMessagesAsync(DeviceSpec device)
-        {
-            while (true)
-            {
-                device._messageId++;
-                device._dateTime = DateTime.Now;
-                string output = JsonConvert.SerializeObject(device);
-
-                var message = new Message(Encoding.ASCII.GetBytes(output));
-
-                await deviceClient.SendEventAsync(message);
-
-                Console.WriteLine("Message Sent. DateTime: {0} MessageId: {1} Key: {2} DeviceName: '{3}'", device._dateTime, device._messageId, device._deviceKey, device._deviceName);
-            }
-        }
-
-        private static async void ReceiveC2dAsync(DeviceSpec device)
-        {
-            Console.WriteLine("\nReceiving cloud to device messages from service");
-            while (true)
-            {
-
-                Message receivedMessage = await deviceClient.ReceiveAsync();
-                if (receivedMessage == null) continue;
-
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Received message: {0}", Encoding.ASCII.GetString(receivedMessage.GetBytes()));
-
-                Console.ResetColor();
-
-                await deviceClient.CompleteAsync(receivedMessage);
-
-                SendDeviceToCloudMessagesAsync(device);
-            }
-        }
-
-
+        
     }
 }

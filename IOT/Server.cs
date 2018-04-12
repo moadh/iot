@@ -45,7 +45,6 @@ namespace IOT
 
         static void Main(string[] args)
         {
-            // Adding this to call direct method
             Console.WriteLine("Call Direct Method\n");
             serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
             Console.ReadLine();
@@ -63,34 +62,6 @@ namespace IOT
             
             Console.WriteLine("Press Enter to exit.");
             Console.ReadLine();
-            //*****
-
-
-            Console.WriteLine("Send Cloud-to-Device message\n");
-            serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
-
-            Console.WriteLine("Press any key to send a C2D message.");
-            Console.ReadLine();
-            SendCloudToDeviceMessageAsync().Wait();
-            eventHubClient = EventHubClient.CreateFromConnectionString(connectionString, iotHubD2cEndpoint);
-
-            var d2cPartitions = eventHubClient.GetRuntimeInformation().PartitionIds;
-
-            CancellationTokenSource cts = new CancellationTokenSource();
-
-            System.Console.CancelKeyPress += (s, e) =>
-            {
-                e.Cancel = true;
-                cts.Cancel();
-                Console.WriteLine("Exiting...");
-            };
-            
-            var tasks = new List<Task>();
-            foreach (string partition in d2cPartitions)
-            {
-                tasks.Add(ReceiveMessagesFromDeviceAsync(partition, cts.Token));
-            }
-            Task.WaitAll(tasks.ToArray());
 
         }
 
@@ -108,33 +79,5 @@ namespace IOT
             
         }
 
-        private async static Task SendCloudToDeviceMessageAsync()
-        {
-            Console.WriteLine("Enter device Name:");
-            string deviceToMessage = Console.ReadLine();
-            Console.WriteLine("Enter Message:");
-            string messageToSend = Console.ReadLine();
-            var commandMessage = new Message(Encoding.ASCII.GetBytes(messageToSend));
-            await serviceClient.SendAsync(deviceToMessage, commandMessage);
-        }
-
-
-        private static async Task ReceiveMessagesFromDeviceAsync(string partition, CancellationToken ct)
-        {
-
-            var eventHubReceiver = eventHubClient.GetDefaultConsumerGroup().CreateReceiver(partition, DateTime.UtcNow);
-
-            while (true)
-            {
-                if (ct.IsCancellationRequested) break;
-                EventData eventData = await eventHubReceiver.ReceiveAsync();
-                if (eventData == null) continue;
-
-                string data = Encoding.UTF8.GetString(eventData.GetBytes());
-                DeviceSpec device = JsonConvert.DeserializeObject<DeviceSpec>(data);
-
-                Console.WriteLine("Message received. DateTime: {0} MessageId: {1} Key: {2} DeviceName: '{3}'", device._dateTime, device._messageId, device._deviceKey, device._deviceName);
-            }
-        }
     }
 }
