@@ -43,13 +43,9 @@ namespace IOT
             deviceName = null
         };
 
-
         static void Main(string[] args)
         {
-           
-
             // Adding this to call direct method
-
             Console.WriteLine("Call Direct Method\n");
             serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
             Console.ReadLine();
@@ -62,7 +58,7 @@ namespace IOT
                 payload.deviceName = "myFirstDevice";
                 InvokeMethod(payload).Wait();
                 x++;
-            } while (x < 20);
+            } while (x < 150);
 
             
             Console.WriteLine("Press Enter to exit.");
