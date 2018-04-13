@@ -10,16 +10,7 @@ using Microsoft.Azure.Devices;
 
 namespace IOT
 {
-
-    public class DeviceSpec
-    {
-        public string _deviceKey { get; set; }
-        public string _deviceName { get; set; }
-        public int _messageId { get; set; }
-        public DateTime _dateTime { get; set; }
-        public DeviceSpec() { }
-    }
-
+    
     public class MetricsPayload
     {
         public int counter { get; set; }
@@ -29,10 +20,10 @@ namespace IOT
     }
 
 
-    class Server
+    class Caller
     {
 
-        static string connectionString = "HostName=AndrewTestHub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=56LhSZUhlbC+dxfMj3bYIspEHF3MhFCTvXakn/dWJIs=";
+        static string connectionString = "{IOT Hub connection string}";
         static string iotHubD2cEndpoint = "messages/events";
         static EventHubClient eventHubClient;
         static ServiceClient serviceClient;
@@ -46,18 +37,18 @@ namespace IOT
         static void Main(string[] args)
         {
             Console.WriteLine("Call Direct Method\n");
+            //Connection to hub
             serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
             Console.ReadLine();
 
-            int x = 0;
-            do
-            {
-                payload.deviceName = "test123";
-                InvokeMethod(payload).Wait();
-                payload.deviceName = "myFirstDevice";
-                InvokeMethod(payload).Wait();
-                x++;
-            } while (x < 150);
+            payload.deviceName = "{device ID #1}";
+            //invokes direct method on device
+            InvokeMethod(payload).Wait();
+
+            payload.deviceName = "{device ID #2}";
+            
+            //invokes direct method on device
+            InvokeMethod(payload).Wait();
 
             
             Console.WriteLine("Press Enter to exit.");

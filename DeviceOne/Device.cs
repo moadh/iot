@@ -21,9 +21,9 @@ namespace DeviceOne
     {
 
         static DeviceClient deviceClient;
-        static string iotHubUri = "AndrewTestHub.azure-devices.net";
-        static string deviceKey = "KDkqhcSqLd0xr/eZxa9FAoguh4Qs6AqLYqcYQg/zz/8=";
-        static string deviceName = "test123";
+        static string iotHubUri = "{IOT Hub URI}";
+        static string deviceKey = "{Device Key}";
+        static string deviceName = "{DEvice ID}";
 
 
         static void Main(string[] args)
