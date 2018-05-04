@@ -8,5 +8,8 @@ This solution uses the Azure IOT direct methods where the caller can invoke dire
 
 
 <b>Instructions</b>
-1. Dowbnload or clone this .net core project to your machine
-2.
+1. Ensure you have .net core 2.0 installed on the machine where you install application
+2. Download or clone this .net core project to your machine
+3. xxx
+4. xxx
+
