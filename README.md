@@ -6,3 +6,7 @@ This solution contains 3 separate console projects. There are 2 device console p
 This solution uses the Azure IOT direct methods where the caller can invoke direct methods within the device applications. This allows for communciation between the hub and the devices on Azure IOT hub.
 
 
+
+<b>Instructions</b>
+1. Dowbnload or clone this .net core project to your machine
+2.
