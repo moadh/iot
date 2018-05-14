@@ -21,20 +21,20 @@ namespace DeviceOne
     {
 
         static DeviceClient deviceClient;
-        static string iotHubUri = "{IOT Hub URI}";
-        static string deviceKey = "{Device Key}";
-        static string deviceName = "{DEvice ID}";
+        static string iotHubUri = "{ Azure hub uri without https:// }";
+        static string deviceKey = "{ Azure Device Key }";
+        static string deviceName = "{ Azure device id }";
 
 
         static void Main(string[] args)
         {
     
-            Console.WriteLine("Device One reporting for duty.\n");
+            Console.WriteLine(deviceName + " reporting for duty.\n");
             deviceClient = DeviceClient.Create(iotHubUri, new DeviceAuthenticationWithRegistrySymmetricKey(deviceName, deviceKey), TransportType.Mqtt);
             deviceClient.SetMethodHandlerAsync("calculate", Calculate, null).Wait();
             Console.WriteLine("Waiting for direct method call\n Press enter to exit.");
             Console.ReadLine();
-            
+
         }
 
         static Task<MethodResponse> Calculate(MethodRequest methodRequest, object userContext)

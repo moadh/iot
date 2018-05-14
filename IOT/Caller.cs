@@ -23,9 +23,7 @@ namespace IOT
     class Caller
     {
 
-        static string connectionString = "{IOT Hub connection string}";
-        static string iotHubD2cEndpoint = "messages/events";
-        static EventHubClient eventHubClient;
+        static string connectionString = "{ Azure Hub connection string }";
         static ServiceClient serviceClient;
 
         public static MetricsPayload payload = new MetricsPayload()
@@ -36,21 +34,18 @@ namespace IOT
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Call Direct Method\n");
+            Console.WriteLine("Call Direct Method by pressing enter\n");
             //Connection to hub
             serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
             Console.ReadLine();
 
-            payload.deviceName = "{device ID #1}";
-            //invokes direct method on device
-            InvokeMethod(payload).Wait();
-
-            payload.deviceName = "{device ID #2}";
+            payload.deviceName = "{ Azure device ID }";
             
-            //invokes direct method on device
-            InvokeMethod(payload).Wait();
-
-            
+            //invokes direct method on device 10 times
+            for (int i = 0; i < 10; i++)
+            {
+                InvokeMethod(payload).Wait();
+            }
             Console.WriteLine("Press Enter to exit.");
             Console.ReadLine();
 
