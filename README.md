@@ -14,5 +14,5 @@ This solution uses the Azure IOT direct methods where the caller can invoke dire
 4. Add your custom code
 5. When ready to deploy to the RPi, create a 'publish' folder by executing this command from the console: dotnet publish -r linux-arm
 6. Using file transfer software that supports SFTP, SCP, SSH, etc. (e.g. WinSCP, filezilla, etc.), copy the entire 'publish' folder to the pi
-7. On the RPi, ensure the executable you copied over has executable permissions (e.g. "chmod 555 ./DeviceTwo")
+7. On the RPi, ensure the executable you copied over has executable permissions (e.g. "chmod +x ./DeviceTwo")
 8. From the command line, start the application (e.g.  "./DeviceTwo")
