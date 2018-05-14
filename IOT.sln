@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOT", "IOT\IOT.csproj", "{12E85011-0C17-4CF9-8757-4CA1F6AB1BF4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Device", "DeviceOne\Device.csproj", "{C29F26C2-2C80-4F8D-BE34-23C1C190146C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Device", "Device\Device.csproj", "{C29F26C2-2C80-4F8D-BE34-23C1C190146C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
