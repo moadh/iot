@@ -12,7 +12,7 @@ This solution uses the Azure IOT direct methods where the caller can invoke dire
 2. Download or clone this .net core project to your machine
 3. Update the files with supplied connection strings, hub uri (make sure to not prepend with http:// https://), and Device ID from provided Hackathon instructions 
 4. Add your custom code
-5. When ready to deploy to the RPi, create a 'publish' folder by executing this command from the console: dotnet publish -r linux-arm
+5. When ready to deploy to the RPi, create a 'publish' folder by executing this command from the console: <code>dotnet publish -r linux-arm</code>
    - NOTE: Only the Device project should be deployed to the Pi
 6. Using file transfer software that supports SFTP, SCP, SSH, etc. (e.g. WinSCP, filezilla, etc.), copy the entire 'publish' folder (...Device\bin\Debug\netcoreapp2.0\linux-arm\publish ) to the pi, this publish folder might be in a different place based on your version of VS
 7. On the RPi, ensure the executable you copied over has executable permissions (e.g. "chmod +x ./Device")
