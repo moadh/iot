@@ -20,10 +20,11 @@ namespace IOT
     }
 
 
+
     class Caller
     {
 
-        static string connectionString = "{ Azure Hub connection string }";
+        static string connectionString = "HostName=team22hub.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=T0bsidvuqV6euGRR5W3QocTm84IT2P6C0zY300Y2tuk=";
         static ServiceClient serviceClient;
 
         public static MetricsPayload payload = new MetricsPayload()
@@ -39,8 +40,9 @@ namespace IOT
             serviceClient = ServiceClient.CreateFromConnectionString(connectionString);
             Console.ReadLine();
 
-            payload.deviceName = "{ Azure device ID }";
-            
+            payload.deviceName = "team22device6";
+            payload.dateTime = DateTime.Now;
+
             //invokes direct method on device 10 times
             for (int i = 0; i < 10; i++)
             {
