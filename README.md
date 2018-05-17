@@ -18,4 +18,4 @@ This solution uses the Azure IOT direct methods where the caller can invoke dire
 8. On the RPi, ensure the executable you copied over has executable permissions (e.g. <code>chmod +x ./Device</code>)
 9. From the command line, start the application (e.g.  "./Device")
 
-<b>Note</b>: it is expected that some teams will also want to run their backend application (Iot project) on a pi as well and this is not an issue. Just repeat steps 5-8 for the other project on another device. Other teams may wish to use their laptop and this is fine as well.
+<b>Note</b>: it is expected that some teams will also want to run their backend application (Iot project) on a pi as well and this is not an issue. Just repeat steps 6-9 for the other project on another device. Other teams may wish to use their laptop and this is fine as well.
