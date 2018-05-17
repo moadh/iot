@@ -57,7 +57,7 @@ namespace IOT
         private static async Task InvokeMethod(MetricsPayload dataToSend)
         {
             string output = JsonConvert.SerializeObject(dataToSend);
-            var methodInvocation = new CloudToDeviceMethod("calculate") { ResponseTimeout = TimeSpan.FromSeconds(30) };
+            var methodInvocation = new CloudToDeviceMethod("count") { ResponseTimeout = TimeSpan.FromSeconds(30) };
 
             methodInvocation.SetPayloadJson(output);
 
