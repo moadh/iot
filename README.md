@@ -7,7 +7,7 @@ This solution uses the Azure IOT direct methods where the caller can invoke dire
 
 
 
-<b>Instructions</b> (expectation is that you will be loading solution onto Raspberry Pi after testing on dev machine)
+<b>Instructions</b> (expectation is that you will be loading device application solutions onto Raspberry Pi after testing on dev machine, the IOT backend app will be run on a laptop with .net framework and VS)
 1. Ensure you have .net core 2.0 installed on the machine where you install application
 2. Download or clone this the project to your machine with both .net projects
 3. Update the files with supplied connection strings, hub uri (make sure to not prepend with http:// https://), and Device ID from provided Hackathon instructions.  
