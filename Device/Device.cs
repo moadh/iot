@@ -4,6 +4,8 @@ using Microsoft.Azure.Devices.Shared;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Text;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace DeviceOne
 {
@@ -11,6 +13,7 @@ namespace DeviceOne
     public class MetricsPayload
     {
         public int counter { get; set; }
+        public int VibrationCount { get; set; }
         public DateTime dateTime { get; set; }
         public string deviceName { get; set; }
         public MetricsPayload() { }
